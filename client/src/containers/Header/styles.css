@@ -1,0 +1,31 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-left {
+    align-items: center;
+    display: flex;
+}
+
+.header-right {
+    align-items: center;
+    display: flex;
+}
+
+.logo {
+    margin-left: 10%;
+}
+
+img {
+    height: 36px;
+} 
+
+.header-select {
+    margin-left: 10%;
+}
+
+.appHeader {
+    background: white;
+}
+
