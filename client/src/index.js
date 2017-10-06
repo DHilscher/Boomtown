@@ -23,19 +23,19 @@ class Boomtown extends Component {
             <MuiThemeProvider muiTheme={muiTheme}>
                 <Router>
                     <div>
-                    <Switch>
-                        <Route exact path="/" />
-                        <Route path="/login" />
-                        <Route path="/share" />
-                        <Route path="/profile/[ID_HERE]" />
-                        <Route path="*" />                                                
-                    </Switch>
-                    <Layout>
+                        <Switch>
+                            <Route exact path="/" />
+                            <Route path="/login" />
+                            <Route path="/share" />
+                            <Route path="/profile/[ID_HERE]" />
+                            <Route path="*" />
+                        </Switch>
+                        <Layout>
 
 
 
 
-                    </Layout>
+                        </Layout>
                     </div>
                 </Router>
             </MuiThemeProvider>
