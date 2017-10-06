@@ -36,7 +36,7 @@ export default class HeaderFilter extends Component {
     return (
       <SelectField
         multiple={true}
-        hintText="Select a name"
+        hintText="Filter by Tag"
         value={values}
         onChange={this.handleChange}
       >

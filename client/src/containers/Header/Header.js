@@ -12,7 +12,7 @@ import './styles.css';
 class Header extends Component {
     render() {
         return (
-            <div class="header-container">
+            <div className="header-container">
                 <HeaderLeft />
                 <HeaderRight />
             </div>

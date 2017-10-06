@@ -4,8 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 class LogoutButton extends Component {
     render() {
         return (
-            <div class="logout-button">
-                <RaisedButton class="logout-button" backgroundColor='black' labelColor='white' label="Logout" />                
+            <div className="logout-button">
+                <RaisedButton className="logout-button" style={{ marginRight: '10px', marginLeft: '15px' }} backgroundColor='black' labelColor='white' label="Logout" />                
             </div>
         )
     }

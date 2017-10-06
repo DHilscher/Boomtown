@@ -6,7 +6,7 @@ import MyProfileButton from './MyProfileButton';
 class HeaderRight extends Component {
     render() {
         return (
-            <div class="header-right">
+            <div className="header-right">
                 <MyProfileButton />                
                 <LogoutButton />
             </div>

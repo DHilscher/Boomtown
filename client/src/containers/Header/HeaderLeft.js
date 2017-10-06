@@ -5,13 +5,15 @@ import HeaderFilter from './Filter';
 class HeaderLeft extends Component {
     render() {
         return (
-            <div class="header-left">
+            <div className="header-left">
                 <div className="logo">
                     <a href="/">
                         <img src={logo} alt="Boomtown Logo" />
                     </a>
                 </div>
+                <div className="header-filter">
                 <HeaderFilter />
+                </div>
             </div>
         )
     }
