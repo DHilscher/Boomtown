@@ -5,8 +5,8 @@ const getCardItemsBegin = () => {
   return { type: 'GET_CARD_ITEMS_BEGIN' }
 }
 
-const getCardItemsSuccess = (items) => {
-  return { type: 'GET_CARD_ITEMS_SUCCESS', items }    
+const getCardItemsSuccess = (items, users) => {
+  return { type: 'GET_CARD_ITEMS_SUCCESS', items, users }    
 }
 
 const getCardItemsError = (error) => {
@@ -14,14 +14,15 @@ const getCardItemsError = (error) => {
 }
 
 
-export const getCardItems = async () => {
+export const getCardItems = () => {
   return (dispatch) => {
     dispatch(getCardItemsBegin())
     return fetch(`${mainURL}/items`)
        .then(resp => resp.json())
        .then(items => {
-         await getUsers()
-        dispatch(getCardItemsSuccess(items))        
+          return getUsers(dispatch).then(users => {
+            dispatch(getCardItemsSuccess(items, users)) 
+        })  
        }).catch(err => {
         dispatch(getCardItemsError(err))                  
        })

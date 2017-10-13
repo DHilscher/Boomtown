@@ -4,8 +4,8 @@ const getUsersBegin = () => {
   return { type: 'GET_USERS_BEGIN' }
 }
 
-const getUsersSuccess = (users) => {
-  return { type: 'GET_USERS_SUCCESS', users }    
+const getUsersSuccess = () => {
+  return { type: 'GET_USERS_SUCCESS' }    
 }
 
 const getUsersError = (error) => {
@@ -13,15 +13,14 @@ const getUsersError = (error) => {
 }
 
 
-export const getUsers = () => {
-  return (dispatch) => {
+export const getUsers = (dispatch) => {
     dispatch(getUsersBegin())
     return fetch(`${mainURL}/users`)
-       .then(resp => resp.json())
-       .then(users => {
-        dispatch(getUsersSuccess(users))        
-       }).catch(err => {
+       .then(resp => {
+           dispatch(getUsersSuccess()) 
+           return resp.json()
+        })
+        .catch(err => {
         dispatch(getUsersError(err))                  
        })
   } 
-} 
