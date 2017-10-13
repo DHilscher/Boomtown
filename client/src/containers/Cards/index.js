@@ -1,3 +1,3 @@
-import CardItem from './Card'
+import CardsList from './CardsList'
 
-export default CardItem
+export default CardsList
