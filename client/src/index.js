@@ -32,9 +32,6 @@ class Boomtown extends Component {
                         </Switch>
                         <Layout>
 
-
-
-
                         </Layout>
                     </div>
                 </Router>
