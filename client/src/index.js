@@ -17,6 +17,7 @@ import muiTheme from './config/theme';
 
 import Layout from './components/Layout';
 import Login from './containers/Login';
+import { Share } from './containers/Share';
 
 const store = configStore();
 
@@ -31,8 +32,8 @@ class Boomtown extends Component {
                         <div>
                             <Switch>
                                 <Route exact path="/" />
-                                <Route path="/login" />
-                                <Route path="/share" />
+                                <Route path="/login" component={Login}/>
+                                <Route path="/share" component={Share}/>
                                 <Route path="/profile/[ID_HERE]" />
                                 <Route path="*" />
                             </Switch>
