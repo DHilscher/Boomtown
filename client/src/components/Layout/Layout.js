@@ -13,9 +13,7 @@ const Layout = ({ children }) => (
         </div>
         <div className="appContent">
             {children}
-            <div className="cards-container">
                 <CardItem />
-            </div>
         </div>
         {/* And a footer here, but not on the login route... */}
     </div>

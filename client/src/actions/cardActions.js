@@ -13,7 +13,6 @@ const getCardItemsError = (error) => {
   return { type: 'GET_CARD_ITEMS_ERROR', error }  
 }
 
-
 export const getCardItems = () => {
   return (dispatch) => {
     dispatch(getCardItemsBegin())

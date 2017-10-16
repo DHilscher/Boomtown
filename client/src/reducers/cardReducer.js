@@ -3,14 +3,25 @@ const initialState = {
   users: [],
   errorMsg: {},
   isLoading: false,
-  filteredItems: []
+  filteredItems: [],
+  allItems: [],
+  items: []
 }
 
 const mergeUsersItems = (users, items) => {
   return users.map(user => {
   return {
     ...user,
-    items : items.filter(item => item.itemOwner === user.id)
+    items : items.filter(item => item.itemowner === user.id)
+  }
+})
+}
+
+const mergeItemsUsers = (users, items) => {
+  return items.map(item => {
+  return {
+    ...item,
+    users : users.filter(user => user.id === item.itemowner)
   }
 })
 }
@@ -32,7 +43,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: mergeUsersItems(action.users, action.items),
-        isLoading: false
+        items: mergeItemsUsers(action.users, action.items),
+        isLoading: false,
+        allItems: action.items
 
       }
     case 'GET_USERS_ERROR':     
@@ -47,5 +60,14 @@ export default (state = initialState, action) => {
 
   }
 }
+
+// const mergeUsersItems = (users, items) => {
+//   return users.map(user => {
+//   return {
+//     ...user,
+//     items : items.filter(item => item.itemOwner === user.id)
+//   }
+// })
+// }
 
 

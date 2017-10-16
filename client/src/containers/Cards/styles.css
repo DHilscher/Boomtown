@@ -1,0 +1,24 @@
+/*.masonry-styling {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}*/
+/*.cards-wrapper {
+  width: 100%;
+  height: 100%;
+}*/
+
+.cards-container {
+  width: 100%;
+}
+
+.card-container {
+  width: 32%;
+  padding: 1%;
+}
+
+.react-gravatar {
+  border-radius: 25px;
+}

@@ -4,6 +4,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Masonry from 'react-masonry-component';
 import { connect } from 'react-redux'
 import { getCardItems } from '../../actions';
+import Gravatar from 'react-gravatar';
+import moment from 'moment';
+import './styles.css';
 class CardsList extends Component {
     componentDidMount() {
         this.props.getCardItems()
@@ -27,13 +30,34 @@ class CardsList extends Component {
     render() {
         console.log(this.props)
         return (
-            <Masonry className="masonry-styling">
-                {this.props.users.map((user) => <ul>{JSON.stringify(user)}</ul> )}
-            </Masonry>
+            <div className="cards-container">
+                <Masonry className="masonry-styling" elementType={'ul'}>
+                        {this.props.items.map((userItems) =>
+                            <li className="card-container" key={userItems.id}>
+                                <Card>
+                                    <CardMedia overlay={!userItems.available && <CardTitle subtitle="Unavailable" />}>
+                                        <img className="item-image" src={userItems.imageurl} alt="" />
+                                    </CardMedia>
+                                    <CardHeader
+                                        title={userItems.users[0].fullname}
+                                        subtitle={moment(userItems.created).fromNow()}
+                                        avatar={<Gravatar email={userItems.users[0].email} />}
+                                    />
+                                    <CardTitle title={userItems.title} subtitle={userItems.tags} />
+                                    <CardText>
+                                        {userItems.description}
+                                    </CardText>
+                                    <CardActions>
+                                       {userItems.available ? <RaisedButton backgroundColor='black' labelColor='white' label="Borrow" /> : false }
+                                    </CardActions>
+                                </Card>
+                            </li>
+                        )}
+                </Masonry>
+            </div>
         )
     }
 };
-
 
 
 
@@ -41,9 +65,9 @@ export default connect((store) => store.users, { getCardItems })(CardsList);
 
 
 
-    
-                {/*<div className="card-container" key={userItems.id}>
-                    <Card style={{ width: '30%' }}>
+
+{/*<div className="card-container" key={userItems.id}>
+                    <Card>
                         <CardMedia overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}>
                             <img src={userItems.imageUrl} alt="" />
                         </CardMedia>
