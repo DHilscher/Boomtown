@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from './../../containers/Header'
-import CardItem from './../../containers/Cards'
-
+import Header from './../../containers/Header';
+import CardItem from './../../containers/Cards';
+import ShareButton from '../../components/share';
 import './styles.css';
 
 const Layout = ({ children }) => (
@@ -15,6 +15,7 @@ const Layout = ({ children }) => (
             {children}
                 <CardItem />
         </div>
+        <ShareButton />
         {/* And a footer here, but not on the login route... */}
     </div>
 );

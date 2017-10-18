@@ -34,7 +34,7 @@ class CardsList extends Component {
                                         {userItems.description}
                                     </CardText>
                                     <CardActions>
-                                       {userItems.available ? <RaisedButton backgroundColor='black' labelColor='white' label="Borrow" /> : false }
+                                       {userItems.available ? <RaisedButton onClick={userItems.available && false} backgroundColor='black' secondary={true} label="Borrow" /> : false }
                                     </CardActions>
                                 </Card>
                             </li>
