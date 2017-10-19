@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './../../containers/Header';
-import ShareButton from '../../components/share';
-import Share from '../.././containers/Share'
+import Share from '../.././containers/Share';
 import './styles.css';
 
 const Layout = ({ children }) => (
@@ -14,8 +13,7 @@ const Layout = ({ children }) => (
         <div className="appContent">
             {children}
         </div>
-        <ShareButton />
-        {/* And a footer here, but not on the login route... */}
+        {window.location.href !== "http://localhost:3000/login" ? <footer style={{ textAlign: 'center' }}>© 2017 Boomtown Corp. All Rights Reserved</footer> : null}
     </div>
 );
 

@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Masonry from 'react-masonry-component';
 import { connect } from 'react-redux'
 import { getCardItems } from '../../actions';
+import ShareButton from '../../components/share';
 import Gravatar from 'react-gravatar';
 import moment from 'moment';
 import './styles.css';
@@ -40,6 +41,7 @@ class CardsList extends Component {
                             </li>
                         )}
                 </Masonry>
+            <ShareButton />
             </div>
         )
     }

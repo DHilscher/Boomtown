@@ -8,7 +8,7 @@ class HeaderLeft extends Component {
             <div className="header-left">
                 <div className="logo">
                     <a href="/">
-                        <img src={logo} alt="Boomtown Logo" />
+                        <img style={{ width: 'auto', height: 36 }} src={logo} alt="Boomtown Logo" />
                     </a>
                 </div>
                 <div className="header-filter">
