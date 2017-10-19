@@ -18,7 +18,7 @@ import muiTheme from './config/theme';
 import Layout from './components/Layout';
 import Login from './containers/Login';
 import { Share } from './containers/Share';
-import CardItem from './containers/Cards';
+import Items from './containers/Cards';
 
 const store = configStore();
 
@@ -30,18 +30,16 @@ class Boomtown extends Component {
             <Provider store={store}>
                 <MuiThemeProvider muiTheme={muiTheme}>
                     <Router>
-                        <div>
                             <Layout>
                             <Switch>
-                                <Route exact path="/" component={CardItem}/>
+                                <Route exact path="/" component={Items}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/share" component={Share}/>
-                                <Route path="/profile/[ID_HERE]" />
+                                <Route path="/profile/[{this.props.users.id}]" />
                                 <Route path="*" />
                             </Switch>
 
                             </Layout>
-                        </div>
                     </Router>
                 </MuiThemeProvider>
             </Provider>

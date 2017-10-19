@@ -7,6 +7,7 @@ import { getCardItems } from '../../actions';
 import ShareButton from '../../components/share';
 import Gravatar from 'react-gravatar';
 import moment from 'moment';
+import { Link } from '../../../node_modules/react-router-dom';
 import './styles.css';
 class CardsList extends Component {
     componentDidMount() {
@@ -25,11 +26,13 @@ class CardsList extends Component {
                                     <CardMedia overlay={!userItems.available && <CardTitle subtitle="Unavailable" />}>
                                         <img className="item-image" src={userItems.imageurl} alt="" />
                                     </CardMedia>
+                                    <Link to={`/profile/${userItems.users[0].fullname}`}>
                                     <CardHeader
                                         title={userItems.users[0].fullname}
                                         subtitle={moment(userItems.created).fromNow()}
                                         avatar={<Gravatar email={userItems.users[0].email} />}
                                     />
+                                    </Link>
                                     <CardTitle title={userItems.title} subtitle={userItems.tags} />
                                     <CardText>
                                         {userItems.description}
