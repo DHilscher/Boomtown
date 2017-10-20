@@ -29,7 +29,17 @@ const typeDefs = `
   user(id: ID!): User
   items: [Item]
   item(id: ID!): Item
-  }
+}
+
+type Mutation {
+  addItem(
+    title: String!
+    description: String
+    imageurl: String
+    tags: [String]
+    itemowner: ID!
+  ): Item
+}
 `;
 
 export default makeExecutableSchema({

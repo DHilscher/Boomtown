@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 import configStore from './configStore';
-import { Provider } from 'react-redux';
 import {
     BrowserRouter as Router,
     Route,
@@ -11,6 +10,8 @@ import {
     Link,
     Redirect
 } from '../node_modules/react-router-dom';
+import { ApolloProvider } from 'react-apollo';
+import client from '../src/config/apolloClient';
 
 import './index.css';
 import muiTheme from './config/theme';
@@ -20,6 +21,7 @@ import Login from './containers/Login';
 import { Share } from './containers/Share';
 import Items from './containers/Cards';
 
+
 const store = configStore();
 
 
@@ -27,7 +29,7 @@ class Boomtown extends Component {
 
     render() {
         return (
-            <Provider store={store}>
+            <ApolloProvider client={client} store={store}>
                 <MuiThemeProvider muiTheme={muiTheme}>
                     <Router>
                             <Layout>
@@ -42,7 +44,7 @@ class Boomtown extends Component {
                             </Layout>
                     </Router>
                 </MuiThemeProvider>
-            </Provider>
+            </ApolloProvider>
         );
     }
 }

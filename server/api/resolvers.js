@@ -1,51 +1,48 @@
 import fetch from 'node-fetch';
+
+import { getItems, getItem, getUsers, getUser, getUserBorrowedItems, getUserOwnedItems, createNewItem } from "./jsonHelpers";
+
 const resolveFunctions = {
-   Query: {
+  Query: {
     items() {
-      return fetch(`http://localhost:3001/items`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+      return getItems();
     },
-    item(root, { id }) {
-      return fetch(`http://localhost:3001/items/${id}`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+    item(root, { id }, context) {
+      // return getItem(id);
+        return context.loaders.SingleItem.load(id)      
     },
     users() {
-      return fetch(`http://localhost:3001/users`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+      return getUsers();
     },
-    user(root, { id }) {
-      return fetch(`http://localhost:3001/users/${id}`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+    user(root, { id }, context) {
+      // return getUser(id);
+        return context.loaders.SingleUser.load(id)      
     }
   },
   Item: {
     borrower(item) {
-      if(!item.borrower) return null
-      return fetch(`http://localhost:3001/users/${item.borrower}`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+      return getUser(item.borrower);      
     },
     itemowner(item) {
-      return fetch(`http://localhost:3001/users/${item.itemowner}`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+      return getUser(item.itemowner);
     }
   },
   User: {
-    async owneditems(user) {
-      const response = await fetch(`http://localhost:3001/items/?itemowner=${user.id}`)
-      const items = await response.json()
-      return items
+    async owneditems(user, args, context) {
+        if (!user.id) return null;
+        // return getUserOwneditems(user.id)
+        return context.loaders.UserOwnedItems.load(user.id)
     },
-    async borroweditems(user) {
-      const response = await fetch(`http://localhost:3001/items/?borrower=${user.id}`)
-      const items = await response.json()
-      return items
+    async borroweditems(user, args, context) {
+      if (!user.id) return null;
+      // return getUserBorroweditems(user.id)
+        return context.loaders.UserBorrowedItems.load(user.id)      
     },
+  },
+  Mutation: {
+    addItem(root, { title, imageurl, description, itemowner, tags }) {
+      return createNewItem(title, imageurl, description, itemowner, tags);
+    }
   }
 };
 export default resolveFunctions;
