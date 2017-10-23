@@ -75,6 +75,12 @@ class CardsList extends Component {
         //     filteredItems: state.filteredItems
         // });
         
-        export default graphql(itemQuery)(CardsList);
+        export default graphql(itemQuery, {
+            options: ownProps => ({
+                variables: {
+                    id: ownProps
+                }
+            }),
+        })(CardsList);
         
         // export default connect(mapStateToProps)(CardsList);

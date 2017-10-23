@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { createLogger} from 'redux-logger'
 import rootReducer  from './reducers'
-import client from './config/apolloClient';
+import client from '../config/apolloClient';
 
 
 const configStore  = ( initialState ) => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
-import configStore from './configStore';
+import configStore from './redux/configStore';
 import {
     BrowserRouter as Router,
     Route,
