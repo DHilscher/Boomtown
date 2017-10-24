@@ -20,6 +20,7 @@ import Layout from './components/Layout';
 import Login from './containers/Login';
 import { Share } from './containers/Share';
 import Items from './containers/Cards';
+import Profile from './containers/Profile';
 
 
 const store = configStore();
@@ -37,7 +38,7 @@ class Boomtown extends Component {
                                 <Route exact path="/" component={Items}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/share" component={Share}/>
-                                <Route path="/profile/[{this.props.users.id}]" />
+                                <Route path="/profile/:id" component={Profile} />
                                 <Route path="*" />
                             </Switch>
 
