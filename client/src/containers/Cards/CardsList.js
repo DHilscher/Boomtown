@@ -35,11 +35,9 @@ export const itemQuery = gql`
     query getItems {
         items {
             id
-            available
             imageurl
             created
             title
-            tags
             description
             itemowner {
                 id

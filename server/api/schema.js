@@ -8,10 +8,8 @@ const typeDefs = `
     title: String!
     description: String
     imageurl: String
-    tags: [String]
-    itemowner: User!
+    itemowner: User
     created: String!
-    available: Boolean!
     borrower: User
   }
 

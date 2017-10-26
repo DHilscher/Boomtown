@@ -1,5 +1,6 @@
 import DataLoader from 'dataloader';
-import { getUser, getUserOwnedItems, getUserBorrowedItems, getItem } from './jsonHelpers';
+// import { getUser, getUserOwnedItems, getUserBorrowedItems, getItem } from './jsonHelpers';
+import { getUser, getUserOwnedItems, getUserBorrowedItems, getItem } from './postgresDB';
 
 export default function() {
   return {
@@ -12,8 +13,8 @@ export default function() {
     SingleItem: new DataLoader(ids => (
       Promise.all(ids.map(id => getItem(id))
     ))),
-    SingleUser: new DataLoader(ids => (
-      Promise.all(ids.map(id => getUser(id))
-    ))),
+    // SingleUser: new DataLoader(ids => (
+    //   Promise.all(ids.map(id => getUser(id))
+    // ))),
   }
 };

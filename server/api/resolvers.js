@@ -1,11 +1,12 @@
 import fetch from 'node-fetch';
+import { database } from "../index";
 
-import { getItems, getItem, getUsers, getUser, getUserBorrowedItems, getUserOwnedItems, createNewItem } from "./jsonHelpers";
+import { getItem, getUsers, getUser, getUserBorrowedItems, getUserOwnedItems, createNewItem } from "./jsonHelpers";
 
 const resolveFunctions = {
   Query: {
     items() {
-      return getItems();
+      return database.getItems();
     },
     item(root, { id }, context) {
       // return getItem(id);
@@ -21,9 +22,11 @@ const resolveFunctions = {
   },
   Item: {
     borrower(item) {
+        if (!item.borrower) return null;      
       return getUser(item.borrower);      
     },
     itemowner(item) {
+        if (!item.itemowner) return null;            
       return getUser(item.itemowner);
     }
   },
