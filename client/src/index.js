@@ -26,7 +26,7 @@ import { login, logout } from "./redux/modules/authentication";
 
 const store = configStore();
 
-var config = {
+const config = {
   apiKey: "AIzaSyCHsgvChhhyADCqvtAi0b1abHFf9bQ-U64",
   authDomain: "boomtown-4fe4a.firebaseapp.com",
   databaseURL: "https://boomtown-4fe4a.firebaseio.com",

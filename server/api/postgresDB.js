@@ -1,24 +1,28 @@
-import {Pool} from 'pg';
+import { Pool } from "pg";
 
 export default function(app) {
-
   const pool = new Pool({
-    host: app.get('PG_HOST'),
-    user: app.get('PG_USER'),
-    password: app.get('PG_PASSWORD'),
-    database:app.get('PG_DATABASE'),
+    host: app.get("PG_HOST"),
+    user: app.get("PG_USER"),
+    password: app.get("PG_PASSWORD"),
+    database: app.get("PG_DATABASE"),
     max: 20,
     idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
+    connectionTimeoutMillis: 2000
   });
   return {
-    getItems(){
-      return pool.query(`SELECT * FROM items`)
-            .then(response => response.rows)
-            
+    getItems() {
+      return pool
+        .query(
+          `
+      SELECT * FROM items
+      ORDER BY id;
+      `
+        )
+        .then(response => response.rows);
     }
   };
-};
+}
 
 // export const getItem = function(id) {
 //   return fetch(`${jsonServer}/items/${id}`)
@@ -53,7 +57,7 @@ export default function(app) {
 // export const createNewItem = function(title, imageurl, description, itemowner, tags) {
 //   const tzOffset = (new Date()).getTimezoneOffset() * 60000; // offset in milliseconds
 //       const localTime = `${(new Date(Date.now() - tzOffset)).toISOString().slice(0, -1).replace('T', ' ')}-07`;
-      
+
 //       const newItem = {
 //         created: localTime,
 //         borrower: null,
