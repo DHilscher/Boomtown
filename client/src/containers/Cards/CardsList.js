@@ -38,6 +38,12 @@ export const itemQuery = gql`
       created
       title
       description
+      tags {
+        title
+      }
+      borrower {
+        id
+      }
       itemowner {
         id
         fullname

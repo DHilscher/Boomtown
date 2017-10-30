@@ -1,7 +1,6 @@
 import { database } from "../index";
 
 import {
-  getItems,
   getItem,
   getUsers,
   getUser,
@@ -9,7 +8,7 @@ import {
   getUserOwnedItems,
   createNewItem
 } from "./jsonHelpers";
-// import { getItems } from "./postgresDB";
+import { getItems, getTags } from "./postgresDB";
 // import { getUser } from "./firebaseHelpers";
 
 const resolveFunctions = {
@@ -27,6 +26,9 @@ const resolveFunctions = {
     user(root, { id }, context) {
       // return getUser(id);
       return context.loaders.SingleUser.load(id);
+    },
+    tags() {
+      return database.getTags();
     }
   },
   Item: {
@@ -37,6 +39,9 @@ const resolveFunctions = {
     itemowner(item) {
       if (!item.itemowner) return null;
       return getUser(item.itemowner);
+    },
+    tags(item) {
+      return database.getTag(item.id);
     }
   },
   User: {

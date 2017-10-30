@@ -2,8 +2,8 @@ import DataLoader from "dataloader";
 import {
   getUserOwnedItems,
   getUser,
-  getUserBorrowedItems,
-  getItem
+  // getItem,
+  getUserBorrowedItems
 } from "./jsonHelpers";
 // import { getUser } from "./firebaseHelpers";
 

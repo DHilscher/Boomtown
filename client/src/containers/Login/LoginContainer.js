@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import * as firebase from "firebase";
 
 import Login from "./Login";
+import { login, logout } from "../../redux/modules/authentication";
+import configStore from "../../redux/configStore";
+
+const store = configStore();
 
 // const config = {
 //   apiKey: "AIzaSyCHsgvChhhyADCqvtAi0b1abHFf9bQ-U64",

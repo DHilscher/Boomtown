@@ -20,6 +20,16 @@ export default function(app) {
       `
         )
         .then(response => response.rows);
+    },
+    getTags() {
+      return pool.query(`SELECT * FROM tags;`).then(response => response.rows);
+    },
+    getTag(itemID) {
+      return pool
+        .query(
+          `select tags.id, tags.title from tags join itemtags on tags.id = itemtags.tagid where itemtags.itemid = ${itemID}`
+        )
+        .then(resp => resp.rows);
     }
   };
 }
