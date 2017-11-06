@@ -3,13 +3,13 @@ import { database } from "../index";
 import {
   getItem,
   getUsers,
-  getUser,
+  // getUser,
   getUserBorrowedItems,
   getUserOwnedItems,
   createNewItem
 } from "./jsonHelpers";
 import { getItems, getTags } from "./postgresDB";
-// import { getUser } from "./firebaseHelpers";
+import { getUser } from "./firebaseHelpers";
 
 const resolveFunctions = {
   Query: {

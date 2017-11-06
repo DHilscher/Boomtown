@@ -1,11 +1,11 @@
 import DataLoader from "dataloader";
 import {
   getUserOwnedItems,
-  getUser,
+  // getUser,
   // getItem,
   getUserBorrowedItems
 } from "./jsonHelpers";
-// import { getUser } from "./firebaseHelpers";
+import { getUser } from "./firebaseHelpers";
 
 export default function() {
   return {

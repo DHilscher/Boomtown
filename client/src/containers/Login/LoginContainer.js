@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as firebase from "firebase";
+import { reduxForm, Field, formValueSelector } from "redux-form";
+import { connect } from "react-redux";
 
 import Login from "./Login";
 import { login, logout } from "../../redux/modules/authentication";
@@ -23,20 +25,50 @@ class LoginContainer extends Component {
 
   login = e => {
     e.preventDefault();
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        store.dispatch(login(user));
-      } else {
-        store.dispatch(logout());
-      }
-    });
-    console.log("You clicked the login button.");
+    const { email, password } = this.props.user;
+    try {
+      const user = firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch (e) {
+      console.log(e);
+    }
   };
+
+  // login = async e => {
+  //   e.preventDefault();
+
+  // try {
+  //   await firebase
+  //     .auth()
+  //     .signInWithEmailAndPassword(
+  //       (this.props.user.email = " "),
+  //       (this.props.user.password = " ")
+  //     );
+  // } catch (e) {
+  //   console.log(e);
+  // }
+
+  // firebase.auth().signInWithEmailAndPassword(function(user) {
+  //   if (user) {
+  //     store.dispatch(login(user));
+  //   } else {
+  //     store.dispatch(logout());
+  //   }
+  // });
+  //   console.log("You clicked the login button.");
+  // };
 
   render() {
     return <Login login={this.login} />;
   }
 }
 
-export default LoginContainer;
+const newItemForm = reduxForm({
+  form: "newItemForm"
+})(LoginContainer);
+
+export default connect(state => {
+  const values = formValueSelector("newItemForm");
+  return {
+    user: values(state, "email", "password")
+  };
+})(newItemForm);
