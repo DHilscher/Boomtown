@@ -12,8 +12,10 @@ class CardsList extends Component {
   static propTypes = {};
 
   render() {
-    if (this.props.data.loading) return <p> loading </p>;
-
+    console.log(this.props.data);
+    if (this.props.data.loading) {
+      return <p> loading </p>;
+    }
     console.log(this.props.data.items);
     return (
       <div className="cards-container">

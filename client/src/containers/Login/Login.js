@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import RaisedButton from "material-ui/RaisedButton";
 import Paper from "material-ui/Paper";
+import { reduxForm, Field, formValueSelector } from "redux-form";
+import { connect } from "react-redux";
 
 import ValidatedTextField from "../../components/ValidatedTextField";
 
@@ -11,7 +13,7 @@ import logo from "../../images/boomtown-logo.svg";
 import bottomLeft from "../../images/home-bl.svg";
 import topRight from "../../images/home-tr.svg";
 
-const Login = ({ login }) => (
+const Login = ({ handleSubmit }) => (
   <div className="page login">
     <div className="logo">
       <img src={logo} alt="Boomtown Logo" />
@@ -25,12 +27,22 @@ const Login = ({ login }) => (
     <div className="cardContainer">
       <Paper zDepth={5}>
         <div className="formContainer">
-          <form onSubmit={login} autoComplete="off">
+          <form onSubmit={handleSubmit} autoComplete="off">
             <div>
-              <ValidatedTextField label="Email" />
+              <Field
+                name="email"
+                type="email"
+                label="Email"
+                component={ValidatedTextField}
+              />
             </div>
             <div>
-              <ValidatedTextField label="Password" />
+              <Field
+                name="password"
+                type="password"
+                label="Password"
+                component={ValidatedTextField}
+              />
             </div>
             <RaisedButton
               className="enterButton"
@@ -48,7 +60,18 @@ const Login = ({ login }) => (
 );
 
 Login.propTypes = {
-  login: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired
 };
 
-export default Login;
+const loginForm = reduxForm({
+  form: "loginForm"
+})(Login);
+
+export default loginForm;
+
+// export default connect(state => {
+//   const values = formValueSelector("LoginForm");
+//   return {
+//     user: values(state, "email", "password")
+//   };
+// })(LoginForm);

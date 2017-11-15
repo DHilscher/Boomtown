@@ -6,11 +6,11 @@
 // }
 
 // const getCardItemsSuccess = (items, users) => {
-//   return { type: 'GET_CARD_ITEMS_SUCCESS', items, users }    
+//   return { type: 'GET_CARD_ITEMS_SUCCESS', items, users }
 // }
 
 // const getCardItemsError = (error) => {
-//   return { type: 'GET_CARD_ITEMS_ERROR', error }  
+//   return { type: 'GET_CARD_ITEMS_ERROR', error }
 // }
 
 // export const getCardItems = () => {
@@ -20,23 +20,22 @@
 //        .then(resp => resp.json())
 //        .then(items => {
 //           return getUsers(dispatch).then(users => {
-//             dispatch(getCardItemsSuccess(items, users)) 
-//         })  
+//             dispatch(getCardItemsSuccess(items, users))
+//         })
 //        }).catch(err => {
-//         dispatch(getCardItemsError(err))                  
+//         dispatch(getCardItemsError(err))
 //        })
-//   } 
-// } 
-
+//   }
+// }
 
 const initialState = {
   // users: [],
   // errorMsg: {},
   // isLoading: false,
   // allItems: [],
-  // items: [],
+  items: [],
   filteredItems: []
-}
+};
 
 // const mergeUsersItems = (users, items) => {
 //   return users.map(user => {
@@ -58,28 +57,26 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    // case 'GET_CARD_ITEMS_BEGIN':
-    //   return {
-    //     ...state,
-    //     // isLoading: true,
-    //   }  
-    // case 'GET_CARD_ITEMS_SUCCESS':
-    //   return {
-    //     ...state,
-    //     // users: mergeUsersItems(action.users, action.items),
-    //     // items: mergeItemsUsers(action.users, action.items),
-    //     // isLoading: false,
-    //     // allItems: action.items
-
-    //   }
-    // case 'GET_CARD_ITEMS_ERROR':
-    //   return {
-    //     ...state,
-    //     // errorMsg: action.error,
-    //     // isLoading: false
-    //   }
+    case "GET_CARD_ITEMS_BEGIN":
+      return {
+        ...state
+        // isLoading: true,
+      };
+    case "GET_CARD_ITEMS_SUCCESS":
+      return {
+        ...state
+        // users: mergeUsersItems(action.users, action.items),
+        // items: mergeItemsUsers(action.users, action.items),
+        // isLoading: false,
+        // allItems: action.items
+      };
+    case "GET_CARD_ITEMS_ERROR":
+      return {
+        ...state
+        // errorMsg: action.error,
+        // isLoading: false
+      };
     default:
-      return state
-
+      return state;
   }
-}
+};

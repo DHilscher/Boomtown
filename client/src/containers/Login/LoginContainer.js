@@ -5,7 +5,6 @@ import { reduxForm, Field, formValueSelector } from "redux-form";
 import { connect } from "react-redux";
 
 import Login from "./Login";
-import { login, logout } from "../../redux/modules/authentication";
 import configStore from "../../redux/configStore";
 
 const store = configStore();
@@ -23,52 +22,48 @@ const store = configStore();
 class LoginContainer extends Component {
   static propTypes = {};
 
-  login = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     const { email, password } = this.props.user;
+    console.log(this.props);
     try {
-      const user = firebase.auth().signInWithEmailAndPassword(email, password);
+      await firebase.auth().signInWithEmailAndPassword(email, password);
     } catch (e) {
       console.log(e);
     }
   };
 
-  // login = async e => {
-  //   e.preventDefault();
-
-  // try {
-  //   await firebase
-  //     .auth()
-  //     .signInWithEmailAndPassword(
-  //       (this.props.user.email = " "),
-  //       (this.props.user.password = " ")
-  //     );
-  // } catch (e) {
-  //   console.log(e);
-  // }
-
-  // firebase.auth().signInWithEmailAndPassword(function(user) {
-  //   if (user) {
-  //     store.dispatch(login(user));
-  //   } else {
-  //     store.dispatch(logout());
-  //   }
-  // });
-  //   console.log("You clicked the login button.");
-  // };
-
   render() {
-    return <Login login={this.login} />;
+    return <Login handleSubmit={this.handleSubmit} />;
   }
 }
 
-const newItemForm = reduxForm({
-  form: "newItemForm"
-})(LoginContainer);
-
-export default connect(state => {
-  const values = formValueSelector("newItemForm");
+const mapStateToProps = state => {
+  const values = formValueSelector("loginForm");
   return {
     user: values(state, "email", "password")
   };
-})(newItemForm);
+};
+
+export default connect(mapStateToProps)(LoginContainer);
+
+// login = e => {
+//   e.preventDefault();
+//   const { email, password } = this.props.user;
+//   console.log(this);
+//   try {
+//     const user = firebase.auth().signInWithEmailAndPassword(email, password);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+
+// firebase.auth().signInWithEmailAndPassword(function(user) {
+//   if (user) {
+//     store.dispatch(login(user));
+//   } else {
+//     store.dispatch(logout());
+//   }
+// });
+//   console.log("You clicked the login button.");
+// };

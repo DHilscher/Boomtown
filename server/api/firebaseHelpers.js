@@ -21,6 +21,8 @@ export const getUser = id => {
         resolve({
           ...snapshot.val(),
           id
+        }).catch(err => {
+          console.log(err);
         });
       });
   });
