@@ -27,3 +27,19 @@ export const getUser = id => {
       });
   });
 };
+
+export const getUsers = () => {
+  return new Promise((resolve, reject) => {
+    firebaseDB
+      .ref(`/users`)
+      .once("value")
+      .then(snapshot => {
+        resolve({
+          ...snapshot.val(),
+          id
+        }).catch(err => {
+          console.log(err);
+        });
+      });
+  });
+};

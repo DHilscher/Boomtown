@@ -2,14 +2,14 @@ import { database } from "../index";
 
 import {
   getItem,
-  getUsers,
+  // getUsers,
   // getUser,
   getUserBorrowedItems,
   getUserOwnedItems,
   createNewItem
 } from "./jsonHelpers";
 import { getItems, getTags } from "./postgresDB";
-import { getUser } from "./firebaseHelpers";
+import { getUser, getUsers } from "./firebaseHelpers";
 
 const resolveFunctions = {
   Query: {
