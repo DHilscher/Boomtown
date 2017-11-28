@@ -27,7 +27,7 @@ const typeDefs = `
   users: [User]
   user(id: ID!): User
   items: [Item]
-  item(id: ID!): Item
+  item(id: ID!): [Item]
   tags: [Tag]
 }
   type Tag {

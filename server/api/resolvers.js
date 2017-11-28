@@ -1,14 +1,11 @@
 import { database } from "../index";
 
 import {
-  getItem,
+  // getItem,
   // getUsers,
   // getUser,
-  getUserBorrowedItems,
-  getUserOwnedItems,
   createNewItem
 } from "./jsonHelpers";
-import { getItems, getTags } from "./postgresDB";
 import { getUser, getUsers } from "./firebaseHelpers";
 
 const resolveFunctions = {
@@ -32,25 +29,25 @@ const resolveFunctions = {
     }
   },
   Item: {
-    borrower(item) {
+    borrower(item, arg, context) {
       if (!item.borrower) return null;
-      return getUser(item.borrower);
+      return context.loaders.SingleUser.load(item.borrower);
     },
-    itemowner(item) {
+    itemowner(item, arg, context) {
       if (!item.itemowner) return null;
-      return getUser(item.itemowner);
+      return context.loaders.SingleUser.load(item.itemowner);
     },
     tags(item) {
       return database.getTag(item.id);
     }
   },
   User: {
-    async owneditems(user, args, context) {
+    async owneditems(user, arg, context) {
       if (!user.id) return null;
       // return getUserOwneditems(user.id)
       return context.loaders.UserOwnedItems.load(user.id);
     },
-    async borroweditems(user, args, context) {
+    async borroweditems(user, arg, context) {
       if (!user.id) return null;
       // return getUserBorroweditems(user.id)
       return context.loaders.UserBorrowedItems.load(user.id);

@@ -21,6 +21,16 @@ export default function(app) {
         )
         .then(response => response.rows);
     },
+    getItem(id) {
+      return pool
+        .query(
+          `
+      SELECT * FROM items WHERE id = ${id}
+      ORDER BY id;      
+      `
+        )
+        .then(response => response.rows);
+    },
     getTags() {
       return pool.query(`SELECT * FROM tags;`).then(response => response.rows);
     },
@@ -30,6 +40,25 @@ export default function(app) {
           `select tags.id, tags.title from tags join itemtags on tags.id = itemtags.tagid where itemtags.itemid = ${itemID}`
         )
         .then(resp => resp.rows);
+    },
+    getUserOwnedItems(id) {
+      return pool
+        .query(
+          `
+      SELECT * FROM items WHERE itemowner = '${id}'
+      `
+        )
+        .then(response => response.rows);
+    },
+    getUserBorrowedItems(id) {
+      return pool
+        .query(
+          `
+      SELECT * FROM items WHERE borrowerid = '${id}'
+      ORDER BY id;
+      `
+        )
+        .then(response => response.rows);
     }
   };
 }
