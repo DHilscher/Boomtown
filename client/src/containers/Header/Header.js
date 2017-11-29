@@ -1,23 +1,24 @@
-import React, { Component } from 'react';
-import HeaderRight from './HeaderRight';
-import HeaderLeft from './HeaderLeft';
+import React, { Component } from "react";
+import * as firebase from "firebase";
+import { connect } from "react-redux";
+import HeaderRight from "./HeaderRight";
+import HeaderLeft from "./HeaderLeft";
 
-
-import './styles.css';
-
-
-
-
+import "./styles.css";
 
 class Header extends Component {
-    render() {
-        return (
-            <div className="header-container">
-                <HeaderLeft />
-                <HeaderRight />
-            </div>
-        )
-    }
+  handleLogout = () => {
+    firebase.auth().signOut();
+  };
+
+  render() {
+    return (
+      <div className="header-container">
+        <HeaderLeft />
+        <HeaderRight handleLogout={this.handleLogout} />
+      </div>
+    );
+  }
 }
 
-export default Header 
+export default connect()(Header);

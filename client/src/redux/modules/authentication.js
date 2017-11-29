@@ -10,13 +10,13 @@ export const logout = () => ({
   type: "LOGOUT"
 });
 
-export default function(state = { user: null }, action) {
+export default function(state = { user: null, authenticate: null }, action) {
   // todo
   switch (action.type) {
     case LOGIN:
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload, authenticate: true };
     case LOGOUT:
-      return { ...state, user: null };
+      return { ...state, user: null, authenticate: false };
     default:
       return state;
   }

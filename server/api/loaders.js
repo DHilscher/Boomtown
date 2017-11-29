@@ -1,9 +1,5 @@
 import DataLoader from "dataloader";
-// import // getUserOwnedItems,
-// // getUser,
-// // getItem,
-// // getUserBorrowedItems
-// "./jsonHelpers";
+
 import { getUser, getUsers } from "./firebaseHelpers";
 import { database } from "../index";
 

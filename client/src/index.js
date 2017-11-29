@@ -23,6 +23,7 @@ import { Share } from "./containers/Share";
 import Items from "./containers/Cards";
 import Profile from "./containers/Profile";
 import { login, logout } from "./redux/modules/authentication";
+import PrivateRoute from "./components/privateRoutes";
 
 const store = configStore();
 
@@ -38,6 +39,7 @@ firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
+    console.log("success, logged in", user);
     store.dispatch(login(user));
   } else {
     store.dispatch(logout());
@@ -52,10 +54,10 @@ class Boomtown extends Component {
           <Router>
             <Layout>
               <Switch>
-                <Route exact path="/" component={Items} />
                 <Route path="/login" component={Login} />
-                <Route path="/share" component={Share} />
-                <Route path="/profile/:id" component={Profile} />
+                <PrivateRoute exact path="/" component={Items} />
+                <PrivateRoute path="/share" component={Share} />
+                <PrivateRoute path="/profile/:id" component={Profile} />
                 <Route path="*" />
               </Switch>
             </Layout>
