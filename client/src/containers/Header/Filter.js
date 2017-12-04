@@ -1,47 +1,53 @@
-import React, { Component } from 'react';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+import React, { Component } from "react";
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
+import { connect } from "react-redux";
+import { filterItems } from "../../redux/modules/filters";
 
-const names = [
-  'Electronics',
-  'Household Items',
-  'Musical Instruments',
-  'Physical Media',
-  'Recreational Equipment',
-  'Sporting Goods',
-  'Tools',
+const tags = [
+  "Electronics",
+  "Household Items",
+  "Musical Instruments",
+  "Physical Media",
+  "Recreational Equipment",
+  "Sporting Goods",
+  "Tools"
 ];
 
-export default class HeaderFilter extends Component {
-  state = {
-    values: [],
-  };
+class HeaderFilter extends Component {
+  handleChange = (event, index, values) =>
+    this.props.dispatch(filterItems(values));
 
-  handleChange = (event, index, values) => this.setState({values});
-
-  menuItems(values) {
-    return names.map((name) => (
+  menuItems() {
+    return tags.map(tag => (
       <MenuItem
-        key={name}
+        key={tag}
         insetChildren={true}
-        checked={values && values.indexOf(name) > -1}
-        value={name}
-        primaryText={name}
+        checked={this.props.filteredTags.indexOf(tag) > -1}
+        value={tag}
+        primaryText={tag}
       />
     ));
   }
 
   render() {
-    const {values} = this.state;
+    // const { values } = this.state;
+    console.log(this.props.filteredTags);
     return (
       <SelectField
         multiple={true}
         hintText="Filter by Tag"
-        value={values}
+        value={this.props.filteredTags}
         onChange={this.handleChange}
       >
-        {this.menuItems(values)}
+        {this.menuItems(tags, this.props.filteredTags)}
       </SelectField>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  filteredTags: state.filters.filters
+});
+
+export default connect(mapStateToProps)(HeaderFilter);

@@ -3,6 +3,7 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import Masonry from "react-masonry-component";
 import { SingleCard } from "../../components/Card";
+import PaperProfile from "../../components/PaperProfile";
 
 class Profile extends Component {
   render() {
@@ -10,6 +11,7 @@ class Profile extends Component {
     console.log("profile", this.props.data);
     return (
       <div className="cards-container">
+        <PaperProfile user={this.props.data.user} />
         <Masonry className="masonry-styling" elementType={"ul"}>
           {this.props.data.user.owneditems.map(userItems => (
             <li className="card-container" key={userItems.id}>

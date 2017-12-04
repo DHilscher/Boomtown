@@ -33,8 +33,7 @@ const initialState = {
   // errorMsg: {},
   // isLoading: false,
   // allItems: [],
-  items: [],
-  filteredItems: []
+  items: []
 };
 
 // const mergeUsersItems = (users, items) => {

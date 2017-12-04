@@ -12,23 +12,50 @@ class CardsList extends Component {
   static propTypes = {};
 
   render() {
-    console.log(this.props.data);
-    if (this.props.data.loading) {
+    const { data, filteredTags } = this.props;
+    if (data.loading) {
       return <p> loading </p>;
     }
-    console.log(this.props.data.items);
-    return (
-      <div className="cards-container">
-        <Masonry className="masonry-styling" elementType={"ul"}>
-          {this.props.data.items.map(userItems => (
-            <li className="card-container" key={userItems.id}>
-              <SingleCard data={userItems} />
-            </li>
-          ))}
-        </Masonry>
-        <ShareButton />
-      </div>
-    );
+    const cardList = data.items;
+    const filteredCardList = cardList.filter(item => {
+      if (
+        item.tags.some(
+          tag =>
+            filteredTags.findIndex(singleTag => singleTag === tag.title) !== -1
+        )
+      ) {
+        return item;
+      }
+      return filteredCardList;
+    });
+
+    if (filteredTags.length > 0) {
+      return (
+        <div className="cards-container">
+          <Masonry className="masonry-styling" elementType={"ul"}>
+            {filteredCardList.map(userItems => (
+              <li className="card-container" key={userItems.id}>
+                <SingleCard data={userItems} />
+              </li>
+            ))}
+          </Masonry>
+          <ShareButton />
+        </div>
+      );
+    } else {
+      return (
+        <div className="cards-container">
+          <Masonry className="masonry-styling" elementType={"ul"}>
+            {data.items.map(userItems => (
+              <li className="card-container" key={userItems.id}>
+                <SingleCard data={userItems} />
+              </li>
+            ))}
+          </Masonry>
+          <ShareButton />
+        </div>
+      );
+    }
   }
 }
 
@@ -55,11 +82,11 @@ export const itemQuery = gql`
   }
 `;
 
-// const mapStateToProps = state => ({
-//     filteredItems: state.filteredItems
-// });
+const mapStateToProps = state => ({
+  filteredTags: state.filters.filters
+});
 
-export default graphql(itemQuery)(CardsList);
+const fetchCardList = graphql(itemQuery)(CardsList);
 // export default graphql(itemQuery, {
 //     options: ownProps => ({
 //         variables: {
@@ -68,4 +95,4 @@ export default graphql(itemQuery)(CardsList);
 //     }),
 // })(CardsList);
 
-// export default connect(mapStateToProps)(CardsList);
+export default connect(mapStateToProps)(fetchCardList);
