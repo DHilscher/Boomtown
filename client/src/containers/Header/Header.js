@@ -12,13 +12,22 @@ class Header extends Component {
   };
 
   render() {
+    const { currentUser } = this.props;
+    console.log(currentUser);
     return (
       <div className="header-container">
         <HeaderLeft />
-        <HeaderRight handleLogout={this.handleLogout} />
+        <HeaderRight
+          cuid={currentUser ? currentUser.uid : false}
+          handleLogout={this.handleLogout}
+        />
       </div>
     );
   }
 }
 
-export default connect()(Header);
+const mapStateToProps = state => ({
+  currentUser: state.auth.user
+});
+
+export default connect(mapStateToProps)(Header);
